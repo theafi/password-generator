@@ -82,7 +82,7 @@ def calculate_entropy(password):
 
 def statistics(password): # Takes already generated password, calculates statistics such as entropy
     entropy = calculate_entropy(password)
-    print("La contraseña tiene una entropía de " + str(entropy) + " bits.")
+    print("Password has an entropy of " + str(entropy) + " bits.")
     #more to come
 
 def main_menu():
