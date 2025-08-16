@@ -3,10 +3,10 @@ import string
 import json
 import math
 
-def generatePassword(complexity, n): # where n is password length
+def generatePassword(complexity, n = 5): # where n is password length
     match complexity:
         case 1: #Only letters
-            a = string.ascii_letters1
+            a = string.ascii_letters
         case 2: #letters and numbers
             a = string.ascii_letters + string.digits 
         case 3: #All available characters
@@ -56,35 +56,45 @@ def generatePassphrase(contains_numbers, n): # n = passphrase length
         #should I make it so it always displays a number?
     return ps
 
-def calculate_entropy(password):
+def statistics(password):
     password_dissected = list(password)
     password_length = len(password_dissected)
-    #E = log2(RL) 
-    #R = size of pool of unique characters
-    #L = password length
-    #initialize the lists I will compare the password with:
     lowercase = list(string.ascii_lowercase) 
     uppercase = list(string.ascii_uppercase)
     digits = list(string.digits)
     special_characters = list(string.punctuation)
     pool = 0
-    #setting pool value depending on characters included in the password
     if [character for character in password if character in lowercase]:
-        pool =+ 26
+            pool += 26
     if [character for character in password if character in uppercase]:
-        pool =+ 26
+            pool += 26
     if [character for character in password if character in digits]:
-        pool =+ 10   
+            pool += 10   
     if [character for character in password if character in special_characters]:
-        pool =+ 32
-    entropy = password_length * math.log(pool, 2)  
-    return entropy
+            pool += 32  
+    def calculate_entropy():
+        '''E = log2(RL) 
+        R = size of pool of unique characters
+        L = password length
+        setting pool value depending on characters included in the password '''
+        entropy = password_length * math.log(pool, 2)  
+        print("Password entropy: " + str(entropy) + " bits.")
+    def daystobreak():
+        total_combinations = pool ^ password_length
+        attack_time = (total_combinations / 1000)  # estimate based on 1000 guesses per second
+        print("It would take " + str(attack_time) + " days to break this password")
+    calculate_entropy()
+    daystobreak()
 
-def statistics(password): # Takes already generated password, calculates statistics such as entropy
+
+
+'''def statistics(password): # Takes already generated password, calculates statistics such as entropy and days to break
     entropy = calculate_entropy(password)
-    print("Password has an entropy of " + str(entropy) + " bits.")
+    print("Password entropy: " + str(entropy) + " bits.")
     #more to come
+turning this into a class would make more sense since I am gonna reuse a bit of it 
 
+'''
 def main_menu():
     print("Generate password.")
     while True:
