@@ -101,15 +101,6 @@ def statistics(password):
     calculate_entropy()
     daystobreak()
 
-
-
-'''def statistics(password): # Takes already generated password, calculates statistics such as entropy and days to break
-    entropy = calculate_entropy(password)
-    print("Password entropy: " + str(entropy) + " bits.")
-    #more to come
-turning this into a class would make more sense since I am gonna reuse a bit of it 
-
-'''
 def main_menu():
     print("Generate password.")
     while True:
