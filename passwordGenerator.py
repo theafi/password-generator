@@ -2,6 +2,7 @@ import random
 import string
 import json
 import math
+from decimal import Decimal
 
 def generatePassword(complexity, n = 5): # where n is password length
     match complexity:
@@ -80,9 +81,23 @@ def statistics(password):
         entropy = password_length * math.log(pool, 2)  
         print("Password entropy: " + str(entropy) + " bits.")
     def daystobreak():
-        total_combinations = pool ^ password_length
-        attack_time = (total_combinations / 1000)  # estimate based on 1000 guesses per second
-        print("It would take " + str(attack_time) + " days to break this password")
+        total_combinations = (pool ** password_length) / 2
+        attack_time = (total_combinations / 10000000)  # estimate based on 10.000.000 guesses per second, which is what a regular PC should be able to hit
+        if (attack_time >= 3600 and attack_time <= 86400): # hours to break
+            attack_time = 3600 / attack_time 
+            print("It would take an attacker " + str(Decimal(attack_time)) + " hours to break this password")
+        elif (attack_time >= 86400 and attack_time <= 2678400): # days to break 
+            attack_time = 86400 / attack_time 
+            print("It would take an attacker " + str(Decimal(attack_time)) + " days to break this password")
+        elif (attack_time >= 2678400 and attack_time <= 31622400): # months to break
+            attack_time = 82678400 / attack_time 
+            print("It would take an attacker " + str(Decimal(attack_time)) + " months to break this password")
+        elif (attack_time >= 31536000): #years to break, this counts common years not counting leap years
+            attack_time = 31536000 / attack_time 
+            print("It would take an attacker " + str(Decimal(attack_time)) + " years to break this password")
+        else:    
+            print("It would take an attacker " + str(Decimal(attack_time)) + " seconds to break this password")
+        print("NOTE: Estimations made based on 10.000.000 hashes/second, the average a common PC can achieve. Actual time may be lower for specialized hardware.")
     calculate_entropy()
     daystobreak()
 
