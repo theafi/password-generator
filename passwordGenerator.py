@@ -30,9 +30,7 @@ def generatePassword(complexity, n = 5): # where n is password length
 
 def load_words():
     with open('english-words/words_dictionary.json') as word_file:
-            #numbers = [string.digits for number in string.digits]
         valid_words = json.load(word_file)
-            #valid_words = [word.strip() for word in word_file] + numbers
         return valid_words
 
 def generatePassphrase(contains_numbers, n): # n = passphrase length
@@ -52,9 +50,7 @@ def generatePassphrase(contains_numbers, n): # n = passphrase length
         ps = " ".join(random.sample(list(words), n))
     else:  
         number = [int(x) for x in string.digits]
-        ps = " ".join(random.sample((list(words) + number), n)) #such a convoluted way to do this
-        #the problem with this approach is that it will not always display a number
-        #should I make it so it always displays a number?
+        ps = " ".join(random.sample((list(words) + number), n)) 
     return ps
 
 def statistics(password):
