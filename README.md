@@ -9,6 +9,6 @@ Current features:
 Features I might add later on:
 
 - Command-line switches to generate passwords without interacting with the CLI.
-- Better format of the statistics display, so that they differenciate from the actual password generate.
+- Better format of the statistics display.
 - Allow exporting the password to a file.
 - A GUI?
