@@ -3,6 +3,7 @@ import string
 import json
 import math
 from decimal import Decimal
+import tkinter as tk
 
 def generatePassword(complexity, n = 5): # where n is password length
     match complexity:
