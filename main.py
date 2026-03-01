@@ -15,12 +15,20 @@ def main():
     #entry.bind("<Return>", return_pressed)
     entry.pack(padx=10, pady=10, fill="x")
     def on_click():
-        entry.insert(0, "test")
+        entry.delete(0, 'end')
+        password = pwg.generatePassword(3,12)
+        entry.insert(0, password)
+
+    generatePassphrase = tk.BooleanVar()
+    passphrase = tk.Checkbutton(root, text="Generate passphrase", var=generatePassphrase)
+    passphrase.pack(padx=20,pady=20)
     button = tk.Button(
         root,
         text="Generate",
         command=on_click,
     )
+    button.pack(padx=15,pady=10)
+
 
     # A helper label to show the selected value
     label = tk.Label(root, text="Entry demo!")
